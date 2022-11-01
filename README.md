@@ -1,4 +1,4 @@
-# *.twitter.ngo
+![*.twitter.ngo](./assets/banner.png)
 
 This code resolves `*.twitter.ngo` subdomains to make twitter names into valid ENS names and more.
 
