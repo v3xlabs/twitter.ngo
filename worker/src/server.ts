@@ -997,6 +997,8 @@ export function makeServer(
                     '0x' + sig.v.toString(16),
                 ]);
 
+                console.log(sigData);
+
                 return [result, validUntil, sigData];
             },
         },

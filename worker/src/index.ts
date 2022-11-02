@@ -41,43 +41,65 @@ const privateKey: BytesLike =
 const address = ethers.utils.computeAddress(privateKey);
 const signer = new ethers.utils.SigningKey(privateKey);
 
+const getENSSubdomain = async (input: string) => {
+    if (!/^\S+\.twitter\.ngo$/.test(input)) throw new Error('Not twitter.ngo');
+
+    const name = input.replace('.twitter.ngo', '');
+
+    return await getTwitterUserByUsername(name);
+};
+
 const database: Database = {
     async addr(name, coinType) {
-        logger.info('hi', name, coinType);
+        try {
+            if (coinType != 60) throw new Error('Not ETH');
 
-        if (/\S+\.twitter\.ngo/.test(name)) {
-            try {
-                const subname = name.replace('.twitter.ngo', '');
+            const twitter = await getENSSubdomain(name);
 
-                const result = await getTwitterUserByUsername(subname);
+            const names = getENSName(twitter.name);
 
-                const names = getENSName(result.name);
+            const addr = await convertENStoAddress(names);
 
-                const addr = await convertENStoAddress(names);
-
-                return { addr: addr, ttl: 0 };
-            } catch (error) {
-                logger.error(error);
-            }
+            return { addr, ttl: 0 };
+        } catch (error) {
+            logger.error(error);
         }
 
         return { addr: '', ttl: 0 };
     },
     contenthash(name) {
-        logger.info('his', name);
-
         return {
             contenthash: '',
             ttl: 0,
         };
     },
-    text(name, key) {
+    async text(name, key) {
         logger.info('hiss', name, key);
 
-        return {
-            value: '',
-            ttl: 0,
-        };
+        try {
+            const twitter = await getENSSubdomain(name);
+
+            if (key == 'avatar') {
+                return { value: twitter.profile_image_url, ttl: 0 };
+            }
+
+            if (key == 'description') {
+                return { value: twitter.description, ttl: 0 };
+            }
+
+            if (key == 'url') {
+                return {
+                    value: `https://twitter.com/${twitter.username}`,
+                    ttl: 0,
+                };
+            }
+
+            return { value: '', ttl: 0 };
+        } catch (error) {
+            logger.error(error);
+        }
+
+        return { value: '', ttl: 0 };
     },
 };
 

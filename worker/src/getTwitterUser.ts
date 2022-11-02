@@ -4,6 +4,8 @@ type TwitterUser = {
     id: string; // '964183418899779584'
     name: string; // 'luc.computer 🇵🇹 ETHLisbon'
     username: string; // 'LucemansNL'
+    description: string; // ''
+    profile_image_url: string; // ''
 };
 
 // Gets the user data by username from the cache or from Twitter
