@@ -83,9 +83,9 @@ const database: Database = {
             //     return { value: twitter.profile_image_url, ttl: 0 };
             // }
 
-            // if (key == 'description') {
-            //     return { value: twitter.description, ttl: 0 };
-            // }
+            if (key == 'description') {
+                return { value: twitter.description, ttl: 0 };
+            }
 
             if (key == 'url') {
                 return {
