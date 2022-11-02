@@ -79,9 +79,12 @@ const database: Database = {
         try {
             const twitter = await getENSSubdomain(name);
 
-            // if (key == 'avatar') {
-            //     return { value: twitter.profile_image_url, ttl: 0 };
-            // }
+            if (key == 'avatar' && twitter.profile_image_url) {
+                return {
+                    value: new URL(twitter.profile_image_url).toString(),
+                    ttl: 0,
+                };
+            }
 
             if (key == 'description') {
                 return { value: twitter.description, ttl: 0 };
