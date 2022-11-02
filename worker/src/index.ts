@@ -79,13 +79,13 @@ const database: Database = {
         try {
             const twitter = await getENSSubdomain(name);
 
-            if (key == 'avatar') {
-                return { value: twitter.profile_image_url, ttl: 0 };
-            }
+            // if (key == 'avatar') {
+            //     return { value: twitter.profile_image_url, ttl: 0 };
+            // }
 
-            if (key == 'description') {
-                return { value: twitter.description, ttl: 0 };
-            }
+            // if (key == 'description') {
+            //     return { value: twitter.description, ttl: 0 };
+            // }
 
             if (key == 'url') {
                 return {
