@@ -35,8 +35,7 @@ export const ethProvider = new providers.CloudflareProvider();
 
 redis.on('error', (error) => console.log('Redis Client Error', error));
 
-const privateKey: BytesLike =
-    '0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80';
+const privateKey: BytesLike = process.env.PRIVATE_KEY;
 
 const address = ethers.utils.computeAddress(privateKey);
 const signer = new ethers.utils.SigningKey(privateKey);
