@@ -61,14 +61,13 @@ const database: Database = {
             }
         }
 
-        return { addr: '0x0000000000000000000000000000000000000000', ttl: 0 };
+        return { addr: '', ttl: 0 };
     },
     contenthash(name) {
         logger.info('his', name);
 
         return {
-            contenthash:
-                '0x0000000000000000000000000000000000000000000000000000000000000000000000000000',
+            contenthash: '',
             ttl: 0,
         };
     },
@@ -76,7 +75,7 @@ const database: Database = {
         logger.info('hiss', name, key);
 
         return {
-            value: 'hi',
+            value: '',
             ttl: 0,
         };
     },
@@ -95,9 +94,7 @@ app.use((request, response, next) => {
 const server = makeApp(signer, database);
 
 app.get('/:sender/:callData.json', async (request, reply) => {
-    const f = await server.handleRequest(request, reply);
-
-    console.log(f);
+    await server.handleRequest(request, reply);
 });
 
 // eslint-disable-next-line sonarjs/no-identical-functions

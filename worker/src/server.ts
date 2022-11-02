@@ -991,7 +991,11 @@ export function makeServer(
                     ]
                 );
                 const sig = signer.signDigest(messageHash);
-                const sigData = hexConcat([sig.r, sig._vs]);
+                const sigData = hexConcat([
+                    sig.r,
+                    sig.s,
+                    '0x' + sig.v.toString(16),
+                ]);
 
                 return [result, validUntil, sigData];
             },

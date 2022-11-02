@@ -14,13 +14,17 @@ export const getTwitterUserByUsername = async (username: string) => {
         return JSON.parse(cachedUserData) as TwitterUser;
     }
 
-    const userData = await twitterClient.v2.userByUsername(username);
+    const userData = await twitterClient.v2.userByUsername(username, {
+        'user.fields': ['profile_image_url', 'description'],
+    });
 
     if (!userData.data || userData.errors) {
         throw new Error(
             'Could not get user data' + JSON.stringify(userData.errors)
         );
     }
+
+    console.log(userData.data);
 
     await redis.set('twitter-user-' + username, JSON.stringify(userData.data), {
         EX: 60 * 60 * 24, // Cache for 24 hours
