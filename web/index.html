@@ -1,13 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>*.twitter.ngo</title>
-</head>
-<body>
-    <h1>Twitter.ngo</h1>
-    <p>Due to popular demand, I am currently building this page while on the plane ✈️. It will be done soonTM</p>
-</body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>*.twitter.ngo</title>
+        <link rel="stylesheet" href="./src/index.css" />
+    </head>
+    <body>
+        <div
+            class="w-screen bg-neutral-100 min-h-screen flex items-center justify-center flex-col gap-4"
+        >
+            <h1 class="text-blue-500 text-4xl font-extrabold">Twitter.ngo</h1>
+            <p class="max-w-full w-96">
+                Due to popular demand, I am currently building this page while
+                on the plane ✈️. It will be done soonTM
+            </p>
+            <div>
+                <input
+                    type="text"
+                    placeholder="vitalikbuterin"
+                    id="input"
+                />.twitter.ngo
+                
+                <button
+                    class="bg-blue-500 px-4 py-2 text-white font-bold rounded-md hover:bg-blue-400 cursor-pointer"
+                    onclick="goToTwitterNGO()"
+                >
+                    Go
+                </button>
+            </div>
+            <script>
+                function goToTwitterNGO() {
+                    const steve = document.getElementById("input").value;
+                    if (steve.match(/[\S]+/)) {
+                        window.open(
+                            `https://app.ens.domains/name/${steve}.twitter.ngo/details`,
+                            "_blank",
+                        );
+                    }
+                }
+            </script>
+        </div>
+    </body>
 </html>
